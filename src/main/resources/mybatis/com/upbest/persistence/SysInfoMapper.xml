@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.upbest.persistence.SysInfoMapper">
+  <resultMap id="BaseResultMap" type="com.upbest.model.SysInfo">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="logo" jdbcType="VARCHAR" property="logo" />
+    <result column="pwd_salt" jdbcType="VARCHAR" property="pwdSalt" />
+    <result column="power_pwd" jdbcType="VARCHAR" property="powerPwd" />
+    <result column="device_id" jdbcType="VARCHAR" property="deviceId" />
+    <result column="port" jdbcType="VARCHAR" property="port" />
+    <result column="host" jdbcType="VARCHAR" property="host" />
+    <result column="reg_code" jdbcType="VARCHAR" property="regCode" />
+    <result column="factory_code" jdbcType="VARCHAR" property="factoryCode" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, name, logo, pwd_salt, power_pwd, device_id, port, host,reg_code,factory_code
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sys_info
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from sys_info
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.upbest.model.SysInfo">
+    insert into sys_info (id, name, logo, 
+      pwd_salt, power_pwd, device_id, 
+      port, host)
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{logo,jdbcType=VARCHAR}, 
+      #{pwdSalt,jdbcType=VARCHAR}, #{powerPwd,jdbcType=VARCHAR}, #{deviceId,jdbcType=VARCHAR}, 
+      #{port,jdbcType=VARCHAR}, #{host,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.upbest.model.SysInfo">
+    insert into sys_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="logo != null">
+        logo,
+      </if>
+      <if test="pwdSalt != null">
+        pwd_salt,
+      </if>
+      <if test="powerPwd != null">
+        power_pwd,
+      </if>
+      <if test="deviceId != null">
+        device_id,
+      </if>
+      <if test="port != null">
+        port,
+      </if>
+      <if test="host != null">
+        host,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="logo != null">
+        #{logo,jdbcType=VARCHAR},
+      </if>
+      <if test="pwdSalt != null">
+        #{pwdSalt,jdbcType=VARCHAR},
+      </if>
+      <if test="powerPwd != null">
+        #{powerPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceId != null">
+        #{deviceId,jdbcType=VARCHAR},
+      </if>
+      <if test="port != null">
+        #{port,jdbcType=VARCHAR},
+      </if>
+      <if test="host != null">
+        #{host,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.upbest.model.SysInfo">
+    update sys_info
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="logo != null">
+        logo = #{logo,jdbcType=VARCHAR},
+      </if>
+      <if test="pwdSalt != null">
+        pwd_salt = #{pwdSalt,jdbcType=VARCHAR},
+      </if>
+      <if test="powerPwd != null">
+        power_pwd = #{powerPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceId != null">
+        device_id = #{deviceId,jdbcType=VARCHAR},
+      </if>
+      <if test="port != null">
+        port = #{port,jdbcType=VARCHAR},
+      </if>
+      <if test="host != null">
+        host = #{host,jdbcType=VARCHAR},
+      </if>
+      <if test="regCode != null">
+        reg_code = #{regCode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.upbest.model.SysInfo">
+    update sys_info
+    set name = #{name,jdbcType=VARCHAR},
+      logo = #{logo,jdbcType=VARCHAR},
+      pwd_salt = #{pwdSalt,jdbcType=VARCHAR},
+      power_pwd = #{powerPwd,jdbcType=VARCHAR},
+      device_id = #{deviceId,jdbcType=VARCHAR},
+      port = #{port,jdbcType=VARCHAR},
+      host = #{host,jdbcType=VARCHAR},
+      reg_code = #{regCode,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <select id="findInfoByFactoryCode" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sys_info  where factory_code = #{code,jdbcType=VARCHAR} 
+  </select>  
+  <select id="findAllInfo" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sys_info   
+  </select>  
+</mapper>
